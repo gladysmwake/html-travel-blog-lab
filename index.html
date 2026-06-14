@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Adventures in Fire Island</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500&family=Caveat:wght@500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="index.css"
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+<div id="prog"></div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-x" id="lbX" aria-label="Close">&#x2715;</button>
+  <button class="lb-nav lb-prev" id="lbP" aria-label="Previous">&#8592;</button>
+  <img src="" alt="" id="lbImg"/>
+  <button class="lb-nav lb-next" id="lbN" aria-label="Next">&#8594;</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Fire <span>Island</span> ✦</div>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#cta">Visit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <!-- Living sky painted on canvas — day/night cycle + sun rays + animated waves + swaying grass -->
+  <canvas id="skyCanvas"></canvas>
+  <!-- Fireflies and ocean foam sparkles -->
+  <canvas id="heroCanvas"></canvas>
+
+  <div class="lighthouse-wrap" aria-hidden="true">
+    <svg width="50" height="160" viewBox="0 0 50 160">
+      <rect x="18" y="0" width="14" height="90" fill="#072e42"/>
+      <polygon points="14,90 36,90 30,110 20,110" fill="#0e3f54"/>
+      <rect x="12" y="110" width="26" height="50" fill="#0a2e42"/>
+      <rect x="10" y="107" width="30" height="6" rx="1" fill="#1b6b8a" opacity=".5"/>
+      <rect x="22" y="2" width="6" height="88" fill="rgba(255,200,80,.12)"/>
+    </svg>
+  </div>
+
+  <div class="birds-wrap" aria-hidden="true">
+    <svg width="80" height="30" viewBox="0 0 80 30">
+      <path d="M0 15 Q5 8 10 15" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+      <path d="M15 10 Q20 3 25 10" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+      <path d="M35 18 Q40 11 45 18" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"/>
+      <path d="M55 8 Q60 2 65 8" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="hero-text">
+    <div class="badge">🌊 Fire Island National Seashore · Long Island, NY</div>
+    <h1>Adventures in<br><em>Fire Island</em></h1>
+    <p class="hero-sub">A car-free barrier island where the Atlantic crashes into wild dunes, ancient holly forests, and boardwalks that lead nowhere — and everywhere.</p>
+    <div class="scrawl">three days. zero cars. endless ocean. ✦</div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Discover</span>
+    <div class="chevrons"><div class="chev"></div><div class="chev"></div><div class="chev"></div></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div>
+        <div class="tape reveal">📍 My trip report</div>
+        <h2 class="reveal d1">A barrier island<br>like <em>no other</em></h2>
+        <p class="reveal d2">Fire Island National Seashore turned out to be everything I'd hoped for — and more. Stretched along a slender barrier island off the south shore of Long Island, the park offers an extraordinary escape from city life. Cars are completely banned, so the only way around is on foot or by bike along weathered wooden boardwalks.</p>
+        <p class="reveal d3">I spent three sun-drenched days exploring the Sunken Forest, a rare maritime holly forest whose canopy feels primordial and otherworldly. In the evenings I wandered the Watch Hill boardwalks and watched ospreys dive into the shimmering Great South Bay. The beaches were pristine, wide and wonderfully empty.</p>
+        <p class="reveal d4">Wildlife sightings were a daily gift — white-tailed deer at the forest edge, horseshoe crabs in the shallows, piping plovers nesting right at the dune line. Whether you come for the hiking, the birding, or simply salt air on your face, Fire Island delivers a quiet magic that's impossible to find this close to New York City.</p>
+        <div class="pills reveal d4">
+          <div class="pill">🏖️ 26 miles long</div>
+          <div class="pill">🚫 Zero cars</div>
+          <div class="pill">🦌 Wild deer</div>
+          <div class="pill">🌿 Sunken Forest</div>
+          <div class="pill">🏛️ Est. 1964</div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="postcard">
+          <div class="postcard-to">To: future adventurers ✉️</div>
+          <hr class="postcard-line"/>
+          <div class="postcard-msg">Got here by ferry from Bay Shore. No roads, no cars — just boardwalks disappearing into sea grass. Ate the best clam chowder of my life at Watch Hill. Saw a deer from about 6 feet away. She didn't even flinch. This place feels like a secret the ocean is keeping.<br><br>The Sunken Forest smells like something from another century. Can't believe it's only 50 miles from Manhattan.</div>
+          <hr class="postcard-line"/>
+          <div class="postcard-sig">— sent from a sunny bench, July</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights">
+  <div class="container">
+    <div class="eyebrow reveal" style="color:var(--dune)">What to do</div>
+    <h2 class="hl-title reveal d1">Island <em>highlights</em></h2>
+    <div class="hl-grid">
+      <div class="hl-card reveal d1"><span class="hl-ico">🌊</span><h3>Atlantic Beaches</h3><p>Wide, unspoiled shorelines perfect for swimming, shelling, and watching the surf pound the coast at golden hour.</p></div>
+      <div class="hl-card reveal d2"><span class="hl-ico">🌿</span><h3>Sunken Forest</h3><p>A rare maritime holly forest tucked behind the dunes — a living time capsule of old-growth coastal woodland.</p></div>
+      <div class="hl-card reveal d3"><span class="hl-ico">🦌</span><h3>Wild Deer</h3><p>White-tailed deer roam freely across the island, unbothered by the occasional awestruck visitor passing on the boardwalk.</p></div>
+      <div class="hl-card reveal d4"><span class="hl-ico">🏛️</span><h3>The Lighthouse</h3><p>The iconic 168-foot Fire Island Lighthouse has guided mariners since 1858. Climb it for sweeping bay-and-ocean views.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="eyebrow reveal">On film</div>
+    <h2 class="reveal d1">Moments from the <em>island</em></h2>
+    <p class="reveal d2" style="color:var(--wood);font-size:.9rem;margin-bottom:0">Click any photo to enlarge.</p>
+    <ul class="gal" id="galGrid">
+      <li class="reveal d1" data-i="0">
+        <img src="gallery-sunken-forest.jpg" alt="Twisted holly trees forming a dense green canopy inside the Sunken Forest"/>
+        <div class="gal-cap"><strong>The Sunken Forest</strong><em>Maritime holly woodland · Watch Hill</em></div>
+      </li>
+      <li class="reveal d2 polaroid" data-i="1">
+        <img src="gallery-beach.jpg" alt="Empty white-sand beach meeting clear blue Atlantic waters"/>
+        <div class="pol-label">Atlantic Beach ☀️</div>
+      </li>
+      <li class="reveal d3" data-i="2">
+        <img src="gallery-boardwalk.jpg" alt="Narrow wooden boardwalk weaving through tall golden dune grass at sunset"/>
+        <div class="gal-cap"><strong>Dune Boardwalk</strong><em>Sailors Haven · sunset walk</em></div>
+      </li>
+      <li class="reveal d4" data-i="3">
+        <img src="gallery-lighthouse.jpg" alt="The Fire Island Lighthouse standing tall against a clear blue sky"/>
+        <div class="gal-cap"><strong>Fire Island Lighthouse</strong><em>Built 1858 · 168 feet tall</em></div>
+      </li>
+      <li class="reveal d5" data-i="4">
+        <img src="gallery-deer.jpg" alt="White-tailed deer standing calmly among beach plum shrubs"/>
+        <div class="gal-cap"><strong>Local Wildlife</strong><em>White-tailed deer · forest edge</em></div>
+      </li>
+      <li class="reveal d6" data-i="5">
+        <img src="gallery-bay-sunset.jpg" alt="Fiery orange sunset reflecting on the Great South Bay"/>
+        <div class="gal-cap"><strong>Great South Bay Sunset</strong><em>Watch Hill ferry dock · evening</em></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- TIDE -->
+<section class="tide-section">
+  <div class="tide-inner">
+    <div class="eyebrow reveal">live ambience</div>
+    <h2 class="reveal d1" style="color:var(--ocean-dark)">Tide <em>rhythm</em></h2>
+    <p class="reveal d2">The Atlantic never stops moving. Neither should you.</p>
+    <canvas id="tideCanvas" aria-label="Animated wave illustration" role="img"></canvas>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-box reveal">
+    <div class="eyebrow" style="margin-bottom:.5rem">Ready?</div>
+    <h3>Plan your <em>National Park</em> adventure today!</h3>
+    <p>Fire Island is open year-round, just 50 miles from Manhattan. Take the ferry from Bay Shore or Sayville, leave the car behind, breathe the salt air, and let the boardwalks lead the way.</p>
+    <a class="cta-link" href="https://www.nps.gov/fiis/index.htm" target="_blank" rel="noopener noreferrer">
+      Explore at NPS.gov <span class="cta-arrow">→</span>
+    </a>
+    <div class="shell-row" aria-hidden="true">
+      <span>🐚</span><span>🦀</span><span>🌊</span><span>🐚</span><span>⭐</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Adventures in Fire Island · A Travel Blog · <a href="https://www.nps.gov/fiis/index.htm" target="_blank" rel="noopener">NPS.gov/fiis</a></p>
+</footer>
+
+<script>
+// ============================================================
+// CURSOR — glowing dot + lagging ring + cursor wake trail
+// ============================================================
+const cur = document.getElementById('cur');
+const curR = document.getElementById('cur-ring');
+let mx = window.innerWidth/2, my = window.innerHeight/2;
+let rx = mx, ry = my;
+let wakeTimer = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx+'px'; cur.style.top = my+'px';
+  clearTimeout(wakeTimer);
+  wakeTimer = setTimeout(() => spawnWake(mx, my), 55);
+});
+
+(function loopRing(){
+  rx += (mx - rx) * .1;
+  ry += (my - ry) * .1;
+  curR.style.left = rx+'px';
+  curR.style.top  = ry+'px';
+  requestAnimationFrame(loopRing);
+})();
+
+function spawnWake(x, y){
+  const w = document.createElement('div');
+  w.className = 'wake';
+  const s = (4 + Math.random()*6)+'px';
+  const colors = ['rgba(244,124,82,.5)','rgba(91,191,176,.4)','rgba(232,201,138,.45)'];
+  w.style.cssText = `left:${x}px;top:${y}px;--ws:${s};background:${colors[Math.floor(Math.random()*3)]};width:${s};height:${s}`;
+  document.body.appendChild(w);
+  setTimeout(() => w.remove(), 950);
+}
+
+document.addEventListener('click', e => {
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.cssText = `left:${e.clientX}px;top:${e.clientY}px`;
+  document.body.appendChild(r);
+  for(let i = 0; i < 5; i++){
+    const b = document.createElement('div');
+    b.className = 'wake';
+    const s = (5 + Math.random()*7)+'px';
+    b.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;--ws:${s};background:rgba(244,124,82,.6);width:${s};height:${s}`;
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 750);
+  }
+  setTimeout(() => r.remove(), 750);
+});
+
+document.querySelectorAll('a,button,.hl-card,.pill,ul.gal li,.postcard').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('h'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('h'));
+});
+
+// ============================================================
+// PROGRESS BAR
+// ============================================================
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  prog.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100)+'%';
+}, {passive: true});
+
+// ============================================================
+// STICKY NAV
+// ============================================================
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('stuck', window.scrollY > 80), {passive:true});
+
+// ============================================================
+// SKY CANVAS — living sky with day/night cycle
+// The sky slowly shifts from pre-dawn → day → golden hour → dusk → night
+// and back, running as a continuous slow loop (~2 min/cycle).
+// Stars twinkle at night, the sun rises and sets, waves lap the shore,
+// and sea grass sways in a virtual breeze.
+// ============================================================
+(function(){
+  const c = document.getElementById('skyCanvas');
+  const ctx = c.getContext('2d');
+  let W, H;
+
+  function resize(){
+    W = c.width = c.offsetWidth || window.innerWidth;
+    H = c.height = c.offsetHeight || window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Stars
+  const stars = [];
+  for(let i = 0; i < 80; i++) stars.push({
+    x: Math.random(), y: Math.random()*.45,
+    r: .6+Math.random()*1.2,
+    ph: Math.random()*Math.PI*2,
+    spd: .4+Math.random()*.8
+  });
+
+  // Grass blades — fixed positions, animated sway each frame
+  const grassClusters = [
+    {xf:.06, count:5}, {xf:.22, count:4}, {xf:.38, count:3},
+    {xf:.52, count:6}, {xf:.68, count:4}, {xf:.82, count:5}, {xf:.94, count:3}
+  ];
+  const blades = [];
+  grassClusters.forEach(g => {
+    for(let i = 0; i < g.count; i++){
+      blades.push({
+        xf: g.xf + (i - g.count/2) * .012 + (Math.random()-.5)*.008,
+        h: 22 + Math.random()*18,
+        ph: Math.random()*Math.PI*2,
+        sw: 6 + Math.random()*6,
+        thick: 1.2 + Math.random()*.8,
+        alpha: .5 + Math.random()*.3
+      });
+    }
+  });
+
+  let t = 0;
+
+  function lerp(a, b, t){ return a + (b-a)*t; }
+  function hexToRgb(h){
+    const n = parseInt(h.slice(1),16);
+    return [(n>>16)&255,(n>>8)&255,n&255];
+  }
+  function lerpHex(a, b, t){
+    const [ar,ag,ab] = hexToRgb(a);
+    const [br,bg,bb] = hexToRgb(b);
+    return `rgb(${Math.round(lerp(ar,br,t))},${Math.round(lerp(ag,bg,t))},${Math.round(lerp(ab,bb,t))})`;
+  }
+
+  // Sky palette keyframes: [top, bottom]  at phase 0..1
+  const skyKeys = [
+    {p:0,   top:'#03111c', bot:'#071a2e'}, // deep night
+    {p:.12, top:'#0a1f38', bot:'#0e3055'}, // pre-dawn
+    {p:.25, top:'#0e3f60', bot:'#1b6b8a'}, // dawn
+    {p:.45, top:'#1a6ba0', bot:'#4ab0cc'}, // mid morning
+    {p:.6,  top:'#3a9ab8', bot:'#89c4d8'}, // bright day
+    {p:.72, top:'#e8a050', bot:'#f47c52'}, // golden hour
+    {p:.82, top:'#c84848', bot:'#e8556a'}, // sunset
+    {p:.92, top:'#3a2060', bot:'#5a2a6a'}, // twilight
+    {p:1,   top:'#03111c', bot:'#071a2e'}, // back to night
+  ];
+
+  function getSkyColors(phase){
+    let lo = skyKeys[0], hi = skyKeys[1];
+    for(let i = 1; i < skyKeys.length; i++){
+      if(phase <= skyKeys[i].p){ lo = skyKeys[i-1]; hi = skyKeys[i]; break; }
+    }
+    const t = (phase - lo.p) / (hi.p - lo.p);
+    return {top: lerpHex(lo.top, hi.top, t), bot: lerpHex(lo.bot, hi.bot, t)};
+  }
+
+  // Sun path: rises from bottom-left, arcs to top-right, sets left
+  function getSunPos(phase){
+    const a = Math.PI + phase * Math.PI; // 0=right, PI=left
+    const cx = W*.5, cy = H*.7, rx2 = W*.45, ry2 = H*.55;
+    return {
+      x: cx - Math.cos(a)*rx2,
+      y: cy - Math.sin(a)*ry2*.7,
+      visible: phase > .05 && phase < .95
+    };
+  }
+
+  function draw(){
+    W = c.width; H = c.height;
+    const phase = ((t * .0004) % 1 + 1) % 1; // slow loop ~0 to 1
+
+    // Sky gradient
+    const sc = getSkyColors(phase);
+    const grd = ctx.createLinearGradient(0,0,0,H*.65);
+    grd.addColorStop(0, sc.top); grd.addColorStop(1, sc.bot);
+    ctx.fillStyle = grd; ctx.fillRect(0,0,W,H);
+
+    // Stars — visible when phase < .3 or > .85
+    const starAlpha = phase < .25 ? lerp(.9,.0,phase/.25) : phase > .82 ? lerp(0,.9,(phase-.82)/.18) : 0;
+    if(starAlpha > .01){
+      stars.forEach(s => {
+        const tw = .5 + .5*Math.sin(t*.025*s.spd + s.ph);
+        ctx.beginPath(); ctx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(255,255,255,${starAlpha*(.3+.7*tw)})`; ctx.fill();
+      });
+    }
+
+    // Moon — visible at night
+    if(starAlpha > .3){
+      const mx2 = W*.18, my2 = H*.12;
+      ctx.beginPath(); ctx.arc(mx2, my2, 22, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,250,220,${starAlpha*.7})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(mx2+10, my2-6, 18, 0, Math.PI*2);
+      ctx.fillStyle = getSkyColors(phase).top; ctx.fill();
+    }
+
+    // Sun
+    const sun = getSunPos(phase);
+    if(sun.visible && sun.y < H*.9){
+      const dayness = Math.min(1, Math.max(0, 1 - Math.abs(phase-.5)/.5));
+      const sz = 45 + dayness*25;
+      const sg = ctx.createRadialGradient(sun.x,sun.y,0,sun.x,sun.y,sz*2.2);
+      sg.addColorStop(0,`rgba(255,245,80,.95)`);
+      sg.addColorStop(.4,`rgba(245,166,35,.8)`);
+      sg.addColorStop(1,'rgba(244,124,82,0)');
+      ctx.beginPath(); ctx.arc(sun.x,sun.y,sz*2.2,0,Math.PI*2);
+      ctx.fillStyle = sg; ctx.fill();
+
+      // Crisp sun disc
+      ctx.beginPath(); ctx.arc(sun.x,sun.y,sz*.55,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,240,100,.95)`; ctx.fill();
+
+      // Rays (only during day)
+      if(dayness > .3){
+        for(let i = 0; i < 12; i++){
+          const a = (i/12)*Math.PI*2 + t*.004;
+          const r1 = sz*.65, r2 = sz*.65 + 45 + Math.sin(t*.04+i)*14;
+          ctx.beginPath();
+          ctx.moveTo(sun.x+Math.cos(a)*r1, sun.y+Math.sin(a)*r1);
+          ctx.lineTo(sun.x+Math.cos(a)*r2, sun.y+Math.sin(a)*r2);
+          ctx.strokeStyle = `rgba(255,220,80,${.14*dayness})`;
+          ctx.lineWidth = i%2===0 ? 2 : 1; ctx.stroke();
+        }
+      }
+
+      // Horizon glow
+      const hg = ctx.createLinearGradient(0, H*.42, 0, H*.65);
+      hg.addColorStop(0,'rgba(244,124,82,0)');
+      hg.addColorStop(.4,`rgba(244,124,82,${.2*(1-dayness+.2)})`);
+      hg.addColorStop(1,'rgba(244,124,82,0)');
+      ctx.fillStyle = hg; ctx.fillRect(0, H*.42, W, H*.23);
+    }
+
+    // Ocean body
+    const og = ctx.createLinearGradient(0, H*.58, 0, H);
+    og.addColorStop(0, `rgba(27,107,138,${.5+.2*Math.max(0,(phase-.2)/.6)})`);
+    og.addColorStop(1, 'rgba(7,46,66,.95)');
+    ctx.fillStyle = og; ctx.fillRect(0, H*.58, W, H);
+
+    // Ocean shimmer strip (sun reflection)
+    if(sun.visible && sun.y < H*.8){
+      const shimX = sun.x, shimY = H*.72;
+      const shimG = ctx.createRadialGradient(shimX,shimY,0,shimX,shimY,W*.18);
+      shimG.addColorStop(0,`rgba(255,230,80,${.14*Math.max(0,(phase-.2)/.5)})`);
+      shimG.addColorStop(1,'rgba(255,230,80,0)');
+      ctx.fillStyle = shimG;
+      ctx.save(); ctx.scale(1,.25); ctx.beginPath();
+      ctx.arc(shimX, shimY*4, W*.18, 0, Math.PI*2); ctx.restore();
+      ctx.fillRect(shimX-W*.16, shimY-20, W*.32, 40);
+    }
+
+    // Animated ocean waves
+    for(let wi = 0; wi < 4; wi++){
+      const wY = H*(.6 + wi*.055);
+      const amp = 3 + wi*2.5;
+      ctx.beginPath(); ctx.moveTo(0, wY);
+      for(let x = 0; x <= W; x += 3){
+        const y = wY
+          + Math.sin((x/W)*Math.PI*7 + t*.038*(1+wi*.4) + wi) * amp
+          + Math.sin((x/W)*Math.PI*11 + t*.055 + wi*1.7) * amp*.35;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath();
+      ctx.fillStyle = `rgba(91,191,176,${.22-.04*wi})`;
+      ctx.fill();
+    }
+
+    // Dune silhouette
+    const dg = ctx.createLinearGradient(0, H*.77, 0, H);
+    dg.addColorStop(0,'#c4943a'); dg.addColorStop(.35,'#e8c98a'); dg.addColorStop(1,'#f7edd8');
+    ctx.beginPath(); ctx.moveTo(0, H);
+    ctx.bezierCurveTo(W*.12, H*.82, W*.32, H*.93, W*.5, H*.79);
+    ctx.bezierCurveTo(W*.66, H*.65, W*.83, H*.87, W, H*.76);
+    ctx.lineTo(W,H); ctx.closePath();
+    ctx.fillStyle = dg; ctx.fill();
+
+    // Sea grass — swaying in simulated breeze
+    const windStrength = .7 + .3*Math.sin(t*.007); // breathing wind
+    blades.forEach(bl => {
+      const bx = bl.xf * W;
+      const groundY = H*.82 + Math.sin(bx*.008)*H*.04;
+      const sway = Math.sin(t*.016 + bl.ph + bx*.009) * bl.sw * windStrength
+                 + Math.sin(t*.027 + bl.ph*1.3) * bl.sw * .35;
+      const tipX = bx + sway;
+      const tipY = groundY - bl.h;
+      const midX = bx + sway*.45;
+      const midY = groundY - bl.h*.55;
+
+      ctx.beginPath();
+      ctx.moveTo(bx, groundY);
+      ctx.quadraticCurveTo(midX, midY, tipX, tipY);
+      ctx.strokeStyle = `rgba(72,105,45,${bl.alpha})`;
+      ctx.lineWidth = bl.thick;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    });
+
+    t++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ============================================================
+// HERO CANVAS — fireflies + ocean foam sparkles
+// ============================================================
+(function(){
+  const c = document.getElementById('heroCanvas');
+  const ctx = c.getContext('2d');
+
+  function resize(){
+    c.width = window.innerWidth;
+    c.height = window.innerHeight * .65;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const flies = [];
+  for(let i = 0; i < 24; i++) flies.push({
+    x: Math.random(), y: .2 + Math.random()*.65,
+    vx: (Math.random()-.5)*.0007,
+    vy: (Math.random()-.5)*.0005,
+    r: 1.5 + Math.random()*2,
+    ph: Math.random()*Math.PI*2,
+    spd: .018 + Math.random()*.038,
+    color: Math.random() > .5 ? '255,235,80' : '160,255,140'
+  });
+
+  const foam = [];
+  for(let i = 0; i < 35; i++) foam.push({
+    x: Math.random(), y: .18 + Math.random()*.52,
+    r: .8 + Math.random()*2.2,
+    ph: Math.random()*Math.PI*2,
+    spd: .012+Math.random()*.022,
+    alpha: .2+Math.random()*.4
+  });
+
+  let t = 0;
+  function draw(){
+    const W = c.width, H = c.height;
+    ctx.clearRect(0,0,W,H);
+
+    foam.forEach(p => {
+      const fl = .4 + .6*Math.sin(t*p.spd*1.8+p.ph);
+      ctx.beginPath(); ctx.arc(p.x*W, p.y*H, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${p.alpha*fl})`; ctx.fill();
+    });
+
+    flies.forEach(f => {
+      f.x += f.vx + Math.sin(t*.012+f.ph)*.0009;
+      f.y += f.vy + Math.cos(t*.009+f.ph)*.0006;
+      if(f.x<0)f.x=1; if(f.x>1)f.x=0;
+      if(f.y<.15)f.vy=Math.abs(f.vy);
+      if(f.y>.88)f.vy=-Math.abs(f.vy);
+
+      const glow = .5 + .5*Math.sin(t*f.spd+f.ph);
+      const alpha = .35+.65*glow;
+      const rad = f.r*(1+.55*glow);
+
+      const sg = ctx.createRadialGradient(f.x*W, f.y*H, 0, f.x*W, f.y*H, rad*4.5);
+      sg.addColorStop(0, `rgba(${f.color},${alpha})`);
+      sg.addColorStop(1, `rgba(${f.color},0)`);
+      ctx.beginPath(); ctx.arc(f.x*W, f.y*H, rad*4.5, 0, Math.PI*2);
+      ctx.fillStyle = sg; ctx.fill();
+
+      ctx.beginPath(); ctx.arc(f.x*W, f.y*H, rad, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${f.color},${alpha})`; ctx.fill();
+    });
+
+    t++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ============================================================
+// PARALLAX HERO ELEMENTS
+// ============================================================
+const heroEl = document.getElementById('hero');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if(y < window.innerHeight){
+    const lh = heroEl.querySelector('.lighthouse-wrap');
+    if(lh) lh.style.transform = `translateY(${y*.15}px)`;
+    const bw = heroEl.querySelector('.birds-wrap');
+    if(bw) bw.style.transform = `translate(${y*.08}px,${-y*.05}px)`;
+  }
+}, {passive:true});
+
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }});
+}, {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ============================================================
+// GALLERY — 3D tilt on mouse move
+// ============================================================
+document.querySelectorAll('#galGrid li:not(.polaroid)').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left)/r.width - .5;
+    const y = (e.clientY - r.top)/r.height - .5;
+    card.style.transition = 'none';
+    card.style.transform = `perspective(600px) rotateY(${x*10}deg) rotateX(${-y*8}deg) translate(-3px,-3px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform .55s cubic-bezier(.23,1,.32,1), box-shadow .5s';
+    card.style.transform = '';
+  });
+});
+
+// ============================================================
+// LIGHTBOX
+// ============================================================
+const items = [...document.querySelectorAll('#galGrid li')];
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+let idx = 0;
+function openLb(i){
+  idx=i; const li=items[i]; const img=li.querySelector('img');
+  const cap=li.querySelector('strong')||li.querySelector('.pol-label');
+  lbImg.src=img.src; lbImg.alt=img.alt;
+  lbCap.textContent=cap?cap.textContent:'';
+  lb.classList.add('open'); document.body.style.overflow='hidden';
+}
+function closeLb(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+items.forEach((li,i) => li.addEventListener('click', ()=>openLb(i)));
+document.getElementById('lbX').addEventListener('click', closeLb);
+document.getElementById('lbP').addEventListener('click', ()=>openLb((idx-1+items.length)%items.length));
+document.getElementById('lbN').addEventListener('click', ()=>openLb((idx+1)%items.length));
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+document.addEventListener('keydown', e=>{
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') closeLb();
+  if(e.key==='ArrowLeft') document.getElementById('lbP').click();
+  if(e.key==='ArrowRight') document.getElementById('lbN').click();
+});
+
+// ============================================================
+// TIDE WAVE CANVAS
+// ============================================================
+(function(){
+  const canvas = document.getElementById('tideCanvas');
+  if(!canvas) return;
+  canvas.width = (canvas.offsetWidth||800)*(window.devicePixelRatio||1);
+  canvas.height = 120*(window.devicePixelRatio||1);
+  const ctx = canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+  let t=0;
+  const waves=[
+    {amp:18,freq:.018,speed:.025,color:'#4a9ebe',alpha:.55,y:.45},
+    {amp:12,freq:.025,speed:.038,color:'#1b6b8a',alpha:.45,y:.58},
+    {amp:8, freq:.034,speed:.052,color:'#5bbfb0',alpha:.4, y:.68},
+    {amp:22,freq:.012,speed:.015,color:'#e8c98a',alpha:.25,y:.35},
+  ];
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    waves.forEach(w=>{
+      ctx.beginPath(); ctx.moveTo(0,H);
+      for(let x=0;x<=W;x+=2){
+        const y=w.y*H+Math.sin(x*w.freq+t*w.speed*60)*w.amp
+                     +Math.sin(x*w.freq*1.7+t*w.speed*40+1)*(w.amp*.5);
+        ctx.lineTo(x,y);
+      }
+      ctx.lineTo(W,H); ctx.closePath();
+      ctx.fillStyle=w.color; ctx.globalAlpha=w.alpha; ctx.fill();
+    });
+    ctx.globalAlpha=1; t++; requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
